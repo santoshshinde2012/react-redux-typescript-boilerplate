@@ -1,4 +1,4 @@
-This repository is for boilerplate of TypeScript with React and webpack.
+Boilerplate and guide for a React with TypeScript.
 
 **Lay out the project**
 
@@ -37,7 +37,11 @@ Webpack is a tool that will bundle your code and optionally all of its dependenc
 Let’s now add React and React-DOM, along with their declaration files, as dependencies to your package.json file:
 
     npm install --save react react-dom @types/react @types/react-dom
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> dc3a650d5028d9a3c90e63684ee22eacc9c45d27
     npm install --save webpack webpack-dev-server @types/node @types/webpack @types/webpack-env
 
 
@@ -74,9 +78,15 @@ To do this, you’ll need to create a tsconfig.json which contains a list of you
 Let’s write our first TypeScript file using React. First, create a file named Hello.tsx in src/components and write the following:
 
       import * as React from "react";
+<<<<<<< HEAD
 
       export interface HelloProps { compiler: string; framework: string; }
 
+=======
+
+      export interface HelloProps { compiler: string; framework: string; }
+
+>>>>>>> dc3a650d5028d9a3c90e63684ee22eacc9c45d27
       // 'HelloProps' describes the shape of props.
       // State is never set so we use the 'undefined' type.
       export class Hello extends React.Component<HelloProps, undefined> {
@@ -89,17 +99,29 @@ We’ll also need a page to display our Hello component. Create a file at the di
 
       <!DOCTYPE html>
       <html>
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> dc3a650d5028d9a3c90e63684ee22eacc9c45d27
       <head>
         <meta charset=utf-8>
         <title>React-Typescript-Application</title>
       </head>
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> dc3a650d5028d9a3c90e63684ee22eacc9c45d27
       <body>
         <div id=root></div>
         <script type="text/javascript" src="/bundle.js"></script>
       </body>
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> dc3a650d5028d9a3c90e63684ee22eacc9c45d27
       </html>
 
 **Create a webpack configuration file**
