@@ -1,7 +1,7 @@
 {
-  "name": "react-robot-factory-client-typescript",
+  "name": "react--client-typescript",
   "version": "1.0.0",
-  "description": "react-robot-factory-client",
+  "description": "react-typescript-client",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
