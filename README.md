@@ -100,6 +100,7 @@ We’ll also need a page to display our Hello component. Create a file at the di
       </html>
 
 **Create a webpack configuration file**
+
 Create a webpack.config.js file at the root of the project directory.
 
 module.exports = {
