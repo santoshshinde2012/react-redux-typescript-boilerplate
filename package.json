@@ -1,0 +1,32 @@
+{
+  "name": "react-robot-factory-client-typescript",
+  "version": "1.0.0",
+  "description": "react-robot-factory-client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --debug --devtool cheap-module-source-map --output-pathinfo --history-api-fallback --hot --inline --progress --colors --port 7000 --open",
+    "build": "webpack -p --progress --colors"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "author": "santosh",
+  "license": "ISC",
+  "dependencies": {
+    "@types/react": "^16.0.5",
+    "@types/react-dom": "^15.5.4",
+    "@types/node": "8.0.14",
+    "@types/webpack": "3.0.4",
+    "@types/webpack-env": "^1.13.0",
+    "webpack": "^3.3.0",
+    "webpack-dev-server": "^2.5.1"
+  },
+  "devDependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "awesome-typescript-loader": "^3.2.3",
+    "source-map-loader": "^0.2.1",
+    "typescript": "^2.5.2"
+  }
+}
