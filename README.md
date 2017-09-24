@@ -1,154 +1,259 @@
-Boilerplate and guide for a React with TypeScript.
+# React, Redux & TypeScript Boilerplate
 
-**Lay out the project**
+This project was created to demonstrate how to set up and organize a project using:
 
-Let’s start out with a new directory. We’ll name it react-typescript-sample for now, but you can change it to whatever you want.
+- [**React**](https://facebook.github.io/react/)
+- [**Redux**](http://redux.js.org/)
+- [**TypeScript**](https://www.typescriptlang.org/)
 
-    mkdir react-typescript-sample
-    cd react-typescript-sample
-
-To start, we’re going to structure our project in the following way:
-
-    react-typescript-sample/
-    ├─ dist/
-    └─ src/
-       └─ components/
-
-TypeScript files will start out in your src folder, run through the TypeScript compiler, then webpack, and end up in a bundle.js file in dist. Any components that we write will go in the src/components folder.
-
-Webpack will eventually generate the dist directory for us.
-
-**Initialize the project**
-
-Now we’ll turn this folder into an npm package.
-
-    npm init
-
-You’ll be given a series of prompts. You can use the defaults except for your entry point. You can always go back and change these in the package.json file that’s been generated for you.
-
-**Install our dependencies**
-
-First ensure Webpack is installed globally.
-
-    npm install -g webpack
-
-Webpack is a tool that will bundle your code and optionally all of its dependencies into a single .js file.
-
-Let’s now add React and React-DOM, along with their declaration files, as dependencies to your package.json file:
-
-    npm install --save react react-dom @types/react @types/react-dom
-
-    npm install --save webpack webpack-dev-server @types/node @types/webpack @types/webpack-env
+# Table of Contents
+- [References](#references)
+- [Project Directory Structure](#project-structure)
+- [Setup](#setup)
+  - [Step 1. Create project](#step-1)
+  - [Step 2. Install Dependencies](#step-2)
+  - [Step 3. Project Configuration](#step-3)
+  - [Step 4. HTML Boilerplate](#step-4)
+- [Build tools](#build-tools)
+- [Steps To Use Existing Repository](#use-existing-repository)
 
 
-That @types/ prefix means that we also want to get the declaration files for React and React-DOM. Usually when you import a path like "react", it will look inside of the react package itself; however, not all packages include declaration files, so TypeScript also looks in the @types/react package as well. You’ll see that we won’t even have to think about this later on.
+# <a name="references"></a>References
 
-Next, we’ll add development-time dependencies on awesome-typescript-loader and source-map-loader.
+- [React & Webpack](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html)
+- [WEBPACK DEV SERVER](https://webpack.github.io/docs/webpack-dev-server.html)
+- [Using JSX with TypeScript](http://blog.mgechev.com/2015/07/05/using-jsx-react-with-typescript/)
+- [Redux Usage with React](http://redux.js.org/docs/basics/UsageWithReact.html)
+- [Why React? Why Redux?](https://blog.stephencleary.com/2016/02/why-react-why-redux.html)
+- [How to configure custom global interfaces (.d.ts files) for TypeScript?](https://stackoverflow.com/questions/42233987/how-to-configure-custom-global-interfaces-d-ts-files-for-typescript)
 
-    npm install --save-dev typescript awesome-typescript-loader source-map-loader
 
-Both of these dependencies will let TypeScript and webpack play well together. awesome-typescript-loader helps Webpack compile your TypeScript code using the TypeScript’s standard configuration file named tsconfig.json. source-map-loader uses any sourcemap outputs from TypeScript to inform webpack when generating its own sourcemaps. This will allow you to debug your final output file as if you were debugging your original TypeScript source code.
+# <a name="project-structure"></a>Project Directory Structure
 
-**Add a TypeScript configuration file**
+```
+|-- src/
+    |-- actions/
+    |-- components/
+    |-- constants/
+    |-- containers/
+    |-- middleware/
+    |-- reducers/
+    |-- store/
+    |-- index.html
+    |-- index.tsx
+|-- types/
+|-- dist/
+    |-- bundle.js
+|-- webpack.config.js
+|-- tsconfig.json
+|-- package.json
+|-- node_modules/
+```
 
-You’ll want to bring your TypeScript files together - both the code you’ll be writing as well as any necessary declaration files.
 
-To do this, you’ll need to create a tsconfig.json which contains a list of your input files as well as all your compilation settings. Simply create a new file in your project root named tsconfig.json and fill it with the following contents:
+where the above directories and files correspond to the following:
 
-    {
-        "compilerOptions": {
-            "outDir": "./dist/",
-            "sourceMap": true,
-            "noImplicitAny": true,
-            "module": "commonjs",
-            "target": "es5",
-            "jsx": "react"
-        },
-        "include": [
-            "./src/**/*"
-        ]
-    }
+- `src/` - Source code
+  - `actions/` - Redux actions and creators
+  - `components/` - React components
+  - `constants/` - Redux actions constants
+  - `containers/` - Redux containers for components
+  - `middleware/` - Redux middleware
+  - `reducers` - Redux reducers
+  - `store` - Redux store
+  - `index.html` - Html page served up to the client
+  - `index.tsx` - Entry point for the javascript code
+- `types/` - Custom global interfaces d.ts files for typescript
+- `dist/` - Output directory for transpiled code
+  - `dist/bundle.js` - Transpiled application
+- `webpack.config.js` - Webpack configuration file
+- `tsconfig.json` - TypeScript configuration file
+- `package.json` - Project configuration file
+- `node_modules/` - Where dependencies are installed to
 
-**Write some sample code**
+# <a name="setup"></a> Setup
+## <a name="step-1"></a> Step 1. Create Project
 
-Let’s write our first TypeScript file using React. First, create a file named Hello.tsx in src/components and write the following:
+Create a new directory, `cd` into it and initialize your project via:
+```
+npm init
+```
+This will take ask your a series of questions, and will generate a `package.json` file based on how you answer them. You can always update the `package.json` file in the future, so don't feel like you have to configure everything correctly out of the box.
 
-      import * as React from "react";
 
-      export interface HelloProps { compiler: string; framework: string; }
+## <a name="step-2"></a> Step 2. Install Dependencies
+This section describes how to install all of the required project dependencies using npm.
 
-      // 'HelloProps' describes the shape of props.
-      // State is never set so we use the 'undefined' type.
-      export class Hello extends React.Component<HelloProps, undefined> {
-          render() {
-              return <h1>Hello from {this.props.compiler} and {this.props.framework}!</h1>;
-          }
-      }
+For every yarn/npm library, there are usually types defined for it in the [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) project. Those type can be added by installing `@types/[normal library name]`, where `[normal library name]` is the name of the library.
 
-We’ll also need a page to display our Hello component. Create a file at the dist of react-typescript-sample named index.html with the following contents:
+### <a name="step-2-webpack"></a> [Webpack](https://webpack.js.org/)
+We will use webpack to manage the compilation of our TypeScript code. Install webpack, and webpack-dev-server by running:
 
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <meta charset=utf-8>
-          <title>React-Typescript-Application</title>
-        </head>
-        <body>
-          <div id=root></div>
-          <script type="text/javascript" src="/bundle.js"></script>
-        </body>
-      </html>
+```
+npm install --save webpack webpack-dev-server
+```
 
-**Create a webpack configuration file**
+### <a name="step-2-react"></a> [React](https://facebook.github.io/react/)
+Install React with type definitions by running:
 
-Create a webpack.config.js file at the root of the project directory.
+```
+npm install --save react react-dom @types/react @types/react-dom
+```
 
+### <a name="step-2-redux"></a> [Redux](https://facebook.github.io/react/)
+Install Redux for usage with react with type definitions by running:
+
+```
+npm install --save redux react-redux @types/redux @types/react-redux
+```
+
+### <a name="step-2-typescript"></a> [TypeScript](https://www.typescriptlang.org/)
+Install TypeScript by running:
+
+```
+npm install --save-dev typescript awesome-typescript-loader --dev
+```
+
+This project uses `awesome-typescript-loader` for TypeScript compilation. The [TypeScript docs](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html) recommend using it. However, [`ts-loader`](https://github.com/TypeStrong/ts-loader) is also mentioned as an alternative. I have not used it, but it may be worth investigating.
+
+
+### Summary
+
+
+```json
+{
+  "name": "Your Project Name",
+  "version": "1.0.0",
+  "description": "Your Description",
+  "main": "index.tsx",
+  "author": "Your Name",
+  "license": "Your License",
+  "scripts": {
+    ...
+  },
+  "dependencies": {
+    ...
+  },
+  "devDependencies": {
+    ...
+  }
+}
+
+```
+
+The `dependencies` and `devDependencies` sections should be populated by the libraries we just installed.
+
+## <a name="step-3"></a> Step 3. Add Configuration Files
+The next step is to add configuration files for Webpack, TypeScript, and Jest.
+
+### <a name="step-3-webpack"></a> Webpack Configuration
+Create a `webpack.config.js` file, and update it to look something like this.
+
+```javascript
+const path = require('path');
 module.exports = {
-    entry: "./src/index.tsx",
-    output: {
-        filename: "bundle.js",
-        path: __dirname + "/dist"
-    },
+  entry: './index.tsx',
+  output: {
+    path: path.resolve('dist'),
+    publicPath: "/dist/",
+    filename: 'bundle.js'
+  },
+  devtool: "source-map",
+  resolve: {
+    // Add '.ts' and '.tsx' as resolvable extensions.
+    extensions: ['.js', '.ts', '.tsx']
+  },
+  module: {
+    loaders: [
+      { test: /\.tsx$/, loader: 'awesome-typescript-loader' },
+    ],
+  }
+}
+```
+The `webpack.config.js` file defines the entry point for our javascript code to live in `./client/index.tsx`, and specifies that the compiled javascript be placed in `./dist/bundle.js`. The `loaders` section describes how to process different file types. We are informing webpack to use the `awesome-typescript-loader` when processing `.ts` and `.tsx` files.
 
-    // Enable sourcemaps for debugging webpack's output.
-    devtool: "source-map",
+### <a name="step-3-typescript"></a> TypeScript Configuration
+Create a TypeScript configuration file called `tsconfig.json` with the following contents:
 
-    resolve: {
-        // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: [".ts", ".tsx", ".js", ".json"]
-    },
+```json
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es5",
+    "jsx": "react",
+    "noUnusedLocals": true,
+    "lib": [
+      "es5",
+      "es6",
+      "dom"
+    ]
+  },
+  "include": [
+    "./src/**/*"
+  ]
+}
+```
 
-    module: {
-        rules: [
-            // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-            { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+## <a name="step-4"></a> Step 4. Add HTML Boilerplate
+We need to define the base HTML file that our application will live in. I recommend using something simple like the following:
 
-            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
-        ]
-    },
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React, Redux and TypeScript Boilerplate</title>
+  </head>
+  <body>
+    <div id="app"> </div>
+    <script src="./dist/bundle.js"> </script>
+  </body>
+</html>
+```
 
-    // When importing a module whose path matches one of the following, just
-    // assume a corresponding global variable exists and use that instead.
-    // This is important because it allows us to avoid bundling all of our
-    // dependencies, which allows browsers to cache those libraries between builds.
-    externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
-    },
-};
+Place the above HTML in an `index.html` file in the root of the project. This file includes a `div` where we will load our application, and the compiled `bundle.js` javascript file.
 
-**Build Application**
+We can add the following script to our `package.json` file to allow us to start a `webpack-dev-server` pointing at the above HTML file. To do this, add the following to the `scripts` section the `package.json` file.
 
-    npm run-script build;
+```json
+"scripts": {
+  "start": "webpack-dev-server --debug --devtool cheap-module-source-map --output-pathinfo --history-api-fallback --hot --inline --progress --colors --port 7000 --open",
+  "build": "webpack -p --progress --colors"
+}
+```
 
-**Run Application**
+### <a name="build-tools"></a>Build tools
 
-    npm start
+- [x] [Webpack](https://webpack.github.io)
+  - [x] [Tree Shaking](https://medium.com/@Rich_Harris/tree-shaking-versus-dead-code-elimination-d3765df85c80)
+  - [x] [Webpack Dev Server](https://github.com/webpack/webpack-dev-server)
+- [x] [Awesome Typescript Loader](https://github.com/s-panferov/awesome-typescript-loader)
+- [x] [PostCSS Loader](https://github.com/postcss/postcss-loader)
+  - [x] [CSS next](https://github.com/MoOx/postcss-cssnext)
+  - [x] [CSS modules](https://github.com/css-modules/css-modules)
+- [x] [React Hot Loader](https://github.com/gaearon/react-hot-loader)
+- [x] [ExtractText Plugin](https://github.com/webpack/extract-text-webpack-plugin)
+- [x] [HTML Webpack Plugin](https://github.com/ampedandwired/html-webpack-plugin)
 
-Browse the following url in Browser
+### <a name="use-existing-repository"></a>Steps To Use Existing Repository
 
-http://localhost:7000/
+## Step1 - Install Dependencies
 
+```
+$ npm install
+```
 
-----------
+## Step2 - Build
+
+```
+$ npm run-script build
+```
+
+## Step3 - Running
+
+```
+$ npm start
+```

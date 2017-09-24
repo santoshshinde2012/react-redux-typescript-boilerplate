@@ -1,34 +1,114 @@
+var webpack = require('webpack');
+var path = require('path');
+
+// variables
+var isProduction = process.argv.indexOf('-p') >= 0;
+var sourcePath = path.join(__dirname, './src');
+var outPath = path.join(__dirname, './dist');
+
+// plugins
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = {
-    entry: "./src/index.tsx",
-    output: {
-        filename: "bundle.js",
-        path: __dirname + "/dist"
+  context: sourcePath,
+  entry: {
+    main: './index.tsx',
+    vendor: [
+      'react',
+      'react-dom',
+      'react-redux',
+      'react-router',
+      'redux'
+    ]
+  },
+  output: {
+    path: outPath,
+    publicPath: '/',
+    filename: 'bundle.js',
+  },
+  target: 'web',
+  resolve: {
+    extensions: ['.js', '.ts', '.tsx'],
+    // Fix webpack's default behavior to not load packages with jsnext:main module
+    // https://github.com/Microsoft/TypeScript/issues/11677
+    mainFields: ['main']
+  },
+  module: {
+    loaders: [
+      // .ts, .tsx
+      {
+        test: /\.tsx?$/,
+        use: isProduction
+          ? 'awesome-typescript-loader?module=es6'
+          : [
+            'react-hot-loader',
+            'awesome-typescript-loader'
+          ]
+      },
+      // css
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              query: {
+                modules: true,
+                sourceMap: !isProduction,
+                importLoaders: 1,
+                localIdentName: '[local]__[hash:base64:5]'
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss',
+                plugins: [
+                  require('postcss-import')({ addDependencyTo: webpack }),
+                  require('postcss-url')(),
+                  require('postcss-cssnext')(),
+                  require('postcss-reporter')(),
+                  require('postcss-browser-reporter')({ disabled: isProduction }),
+                ]
+              }
+            }
+          ]
+        })
+      },
+      // static assets
+      { test: /\.html$/, use: 'html-loader' },
+      { test: /\.png$/, use: 'url-loader?limit=10000' },
+      { test: /\.jpg$/, use: 'file-loader' },
+    ],
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'vendor.bundle.js',
+      minChunks: Infinity
+    }),
+    new webpack.optimize.AggressiveMergingPlugin(),
+    new ExtractTextPlugin({
+      filename: 'styles.css',
+      disable: !isProduction
+    }),
+    new HtmlWebpackPlugin({
+      template: 'index.html'
+    })
+  ],
+  devServer: {
+    contentBase: sourcePath,
+    hot: true,
+    stats: {
+      warnings: false
     },
-
-    // Enable sourcemaps for debugging webpack's output.
-    devtool: "source-map",
-
-    resolve: {
-        // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: [".ts", ".tsx", ".js", ".json"]
-    },
-
-    module: {
-        rules: [
-            // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-            { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
-
-            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
-        ]
-    },
-
-    // When importing a module whose path matches one of the following, just
-    // assume a corresponding global variable exists and use that instead.
-    // This is important because it allows us to avoid bundling all of our
-    // dependencies, which allows browsers to cache those libraries between builds.
-    externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
-    },
+  },
+  node: {
+    // workaround for webpack-dev-server issue
+    // https://github.com/webpack/webpack-dev-server/issues/60#issuecomment-103411179
+    fs: 'empty',
+    net: 'empty'
+  }
 };

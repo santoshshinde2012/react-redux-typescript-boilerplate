@@ -2,3 +2,6 @@
 **/.idea/
 **/bower_components/
 **/node_modules/
+.vscode
+.DS_STORE
+*.log*
