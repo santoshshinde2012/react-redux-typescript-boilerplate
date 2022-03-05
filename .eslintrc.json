@@ -12,6 +12,7 @@
     "extends": [
         "plugin:react/recommended",
         "standard",
+        "plugin:jest-dom/recommended",
         "prettier"
     ],
     "parser": "@typescript-eslint/parser",
@@ -25,6 +26,7 @@
     "plugins": [
         "react",
         "@typescript-eslint",
+        "jest-dom",
         "prettier"
     ],
     "rules": {

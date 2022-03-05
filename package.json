@@ -9,12 +9,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write \"src/**/*.{ts,tsx,json,css,scss}\"",
+    "test:coverage": "react-scripts test --coverage --watchAll=false",
     "lint": "eslint . --ext js,jsx,mjs,ts,tsx ",
-    "lint-fix": "eslint . --ext js,jsx,mjs,ts,tsx --fix",
+    "lint:fix": "eslint . --ext js,jsx,mjs,ts,tsx --fix",
     "lint:quiet": "eslint . --ext js,jsx,mjs,ts,tsx --quiet"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.0",
@@ -42,11 +40,23 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest-dom": "^4.0.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-react": "^7.29.3",
     "prettier": "^2.5.1"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "src/serviceWorker.ts",
+      "setupTests.ts",
+      "react-app-env.d.ts",
+      "__snapshots__/*"
+    ],
+    "collectCoverageFrom": [
+      "src/**"
+    ]
   },
   "browserslist": {
     "production": [
