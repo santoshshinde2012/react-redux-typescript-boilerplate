@@ -1,7 +1,13 @@
 {
     "env": {
         "browser": true,
+        "jest": true,
         "es2021": true
+    },
+    "settings": {
+        "react": {
+          "version": "detect"
+        }
     },
     "extends": [
         "plugin:react/recommended",
@@ -20,8 +26,19 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+        "camelcase": "error"
     },
     "overrides": [
+        {
+            "files": ["**/*.ts", "**/*.tsx"],
+            "plugins": ["@typescript-eslint"],
+            "rules": {
+              // https://stackoverflow.com/questions/63818415/react-was-used-before-it-was-defined
+              "no-use-before-define": "off",
+              "@typescript-eslint/no-use-before-define": ["error"]
+            }
+        },
         {
           "files": ["*.test.*"],
           "rules": {

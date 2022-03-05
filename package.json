@@ -8,7 +8,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint . --ext js,jsx,mjs,ts,tsx"
+    "lint": "eslint . --ext js,jsx,mjs,ts,tsx ",
+    "lint-fix": "eslint . --ext js,jsx,mjs,ts,tsx --fix",
+    "lint:quiet": "eslint . --ext js,jsx,mjs,ts,tsx --quiet"   
   },
   "eslintConfig": {
     "extends": "react-app"

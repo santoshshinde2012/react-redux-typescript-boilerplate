@@ -1,17 +1,16 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import Loader from '../../components/loader/Loader';
-import { useAppSelector } from '../../store/hooks';
-import { getLandingPageDetails } from '../../store/landing/slice';
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import Loader from '../../components/loader/Loader'
+import { useAppSelector } from '../../store/hooks'
+import { getLandingPageDetails } from '../../store/landing/slice'
 
-
-function LandingPage() {
-  const dispatch = useDispatch();
-  const { data, loading, error } = useAppSelector((state) => state.landing);
+function LandingPage () {
+  const dispatch = useDispatch()
+  const { data, loading, error } = useAppSelector((state) => state.landing)
 
   useEffect(() => {
-    dispatch(getLandingPageDetails());
-  }, [dispatch]);
+    dispatch(getLandingPageDetails())
+  }, [dispatch])
 
   return (
    <div className='landing'>
@@ -34,12 +33,12 @@ function LandingPage() {
                   <span>Senior Software Enginneer</span>
                   <p>{data.description}</p>
                 </div>
-            </div>  
+            </div>
         </div>
        )
      }
    </div>
-  );
+  )
 }
 
-export default LandingPage;
+export default LandingPage
