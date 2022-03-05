@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { LandingDetails } from "../../pages/landing/types";
+import { LandingDetails } from "../../types/LandingPage";
 import httpclient from "../../utils/api";
 import error from "../../utils/error";
 

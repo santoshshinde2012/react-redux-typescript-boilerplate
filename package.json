@@ -1,12 +1,18 @@
 {
   "name": "react-redux-toolkit-typescript-boilerplate",
-  "homepage": "https://santoshshinde2012.github.io/react-redux-typescript-boilerplate",
   "version": "1.0.0",
+  "homepage": ".",
   "author": "Santosh Shinde",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "clean": "rimraf {bin,build}",
+    "clean:cdn": "rimraf build/global/css",
+    "build:css": "npm run clean && npm run clean:cdn && sass --no-source-map --style=compressed src/styles/index.scss public/global/css/index.css",
+    "watch:css": "npm run build:css && sass --watch src/styles:public/global/css",
+    "build:prod": "npm run build:css && npm run build -- --profile",
+    "dev": "npm-run-all -p watch:css start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write \"src/**/*.{ts,tsx,json,css,scss}\"",
@@ -21,16 +27,15 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.0",
     "@types/node": "^12.20.46",
-    "@types/node-sass": "^4.11.2",
     "@types/react": "^16.14.23",
     "@types/react-dom": "^16.9.14",
     "@types/react-redux": "^7.1.23",
     "axios": "^0.26.0",
-    "node-sass": "^7.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
     "react-scripts": "5.0.0",
+    "sass": "^1.49.9",
     "typescript": "~4.1.5"
   },
   "devDependencies": {
@@ -50,6 +55,7 @@
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-react": "^7.29.3",
     "husky": "^7.0.4",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.5.1"
   },
   "jest": {
@@ -62,6 +68,10 @@
     "collectCoverageFrom": [
       "src/**"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/santoshshinde2012/react-redux-typescript-boilerplate.git"
   },
   "browserslist": {
     "production": [
