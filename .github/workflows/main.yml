@@ -36,8 +36,11 @@ jobs:
       run: npm run build --if-present
     - name: Test
       run: npm run test
-    - name: deploy to gh-pages
-      uses: peaceiris/actions-gh-pages@v3
+    - name: Deploy
+      uses: crazy-max/ghaction-github-pages@v2.6.0
       with:
-        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        publish_dir: ./build   
+        target_branch: gh-pages
+        build_dir: build
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
