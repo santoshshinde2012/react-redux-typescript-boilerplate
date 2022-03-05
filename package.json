@@ -12,7 +12,10 @@
     "test:coverage": "react-scripts test --coverage --watchAll=false",
     "lint": "eslint . --ext js,jsx,mjs,ts,tsx ",
     "lint:fix": "eslint . --ext js,jsx,mjs,ts,tsx --fix",
-    "lint:quiet": "eslint . --ext js,jsx,mjs,ts,tsx --quiet"
+    "lint:quiet": "eslint . --ext js,jsx,mjs,ts,tsx --quiet",
+    "prepare": "husky install",
+    "precommit": "npm run lint:fix && npm run format",
+    "prepush": "npm run lint"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.0",
@@ -45,6 +48,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-react": "^7.29.3",
+    "husky": "^7.0.4",
     "prettier": "^2.5.1"
   },
   "jest": {
