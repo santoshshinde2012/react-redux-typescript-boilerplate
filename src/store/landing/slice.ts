@@ -1,50 +1,50 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { LandingDetails } from '../../pages/landing/types'
-import httpclient from '../../utils/api'
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { LandingDetails } from "../../pages/landing/types";
+import httpclient from "../../utils/api";
+import error from "../../utils/error";
 
 interface LandingPageState {
-  data ? : LandingDetails | null;
+  data?: LandingDetails | null;
   loading: boolean;
-  error ? : any;
+  error?: string | null;
 }
 
 const initialState: LandingPageState = {
   data: null,
   loading: false,
-  error: null
-}
+  error: null,
+};
 
-export const getLandingPageDetails = createAsyncThunk('landing/gerDetails', async (dispatch, getState) => {
-  try {
-    const response = await httpclient().get('/global/mock-data/landing.json')
-    return response.data
-  } catch (err: any) {
-    return err.message
+export const getLandingPageDetails = createAsyncThunk(
+  "landing/gerDetails",
+  async () => {
+    try {
+      const response = await httpclient().get("/global/mock-data/landing.json");
+      return response.data;
+    } catch (err) {
+      return err;
+    }
   }
-}
-)
+);
 
 const slice = createSlice({
-  name: 'landing',
+  name: "landing",
   initialState,
   reducers: {},
-  extraReducers (builder): void {
+  extraReducers(builder): void {
     builder.addCase(getLandingPageDetails.pending, (state) => {
-      state.loading = true
-    }
-    )
+      state.loading = true;
+    });
     builder.addCase(getLandingPageDetails.fulfilled, (state, action) => {
-      state.loading = false
-      state.data = action.payload
-    }
-    )
+      state.loading = false;
+      state.data = action.payload;
+    });
     builder.addCase(getLandingPageDetails.rejected, (state, action) => {
-      state.loading = false
+      state.loading = false;
       // action.payload contains error information
-      state.error = action.payload
-    }
-    )
-  }
-})
+      state.error = error(action.payload);
+    });
+  },
+});
 
-export default slice.reducer
+export default slice.reducer;

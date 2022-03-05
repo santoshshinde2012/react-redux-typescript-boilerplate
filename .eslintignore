@@ -1,5 +1,14 @@
-node_modules
-dist
+
+// .eslintignore
+.idea
+.storybook
+.config
+node_modules/*
+config/*
+public/*
+scripts/*
+src/react-app-env.d.ts
+src/reportWebVitals.ts
 coverage
 public
 wiki

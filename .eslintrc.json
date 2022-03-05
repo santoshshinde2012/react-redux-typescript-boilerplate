@@ -11,7 +11,8 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "standard"
+        "standard",
+        "prettier"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -23,11 +24,28 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "prettier"
     ],
     "rules": {
-        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
-        "camelcase": "error"
+      "prettier/prettier": ["error"],
+      "semi": ["error", "always"],
+      "object-curly-spacing": ["error", "always"],
+      "camelcase": "off",
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/no-explicit-any": 1,
+      "@typescript-eslint/no-inferrable-types": [
+          "warn",
+          {
+          "ignoreParameters": true
+          }
+      ],
+      "no-underscore-dangle": "off",
+      "no-shadow": "off",
+      "no-new": 0,
+      "@typescript-eslint/no-shadow": ["error"],
+      "@typescript-eslint/no-unused-vars": "warn",
+      "class-methods-use-this": "off"
     },
     "overrides": [
         {

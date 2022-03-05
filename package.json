@@ -8,9 +8,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "format": "prettier --write \"src/**/*.{ts,tsx,json,css,scss}\"",
     "lint": "eslint . --ext js,jsx,mjs,ts,tsx ",
     "lint-fix": "eslint . --ext js,jsx,mjs,ts,tsx --fix",
-    "lint:quiet": "eslint . --ext js,jsx,mjs,ts,tsx --quiet"   
+    "lint:quiet": "eslint . --ext js,jsx,mjs,ts,tsx --quiet"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -38,11 +39,14 @@
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.13.0",
     "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^5.2.0",
-    "eslint-plugin-react": "^7.29.3"
+    "eslint-plugin-react": "^7.29.3",
+    "prettier": "^2.5.1"
   },
   "browserslist": {
     "production": [

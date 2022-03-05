@@ -1,15 +1,15 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import landingReducer from './landing/slice'
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import landingReducer from "./landing/slice";
 
 const store = configureStore({
   reducer: {
-    landing: landingReducer
-  }
-})
+    landing: landingReducer,
+  },
+});
 
 export type AppDispatch = typeof store.dispatch;
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
 
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
@@ -17,4 +17,4 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
-export default store
+export default store;
