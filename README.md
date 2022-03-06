@@ -51,12 +51,6 @@ Below is a list of all the scripts this template has available:
 
 ### Project Structure
 
-| Name                              | Description |
-| --------------------------------- | ----------- |
-| **wiki/**                         | You can add project documentation and insructions file here |
-| **src/**                          | Source files |
-
-
 | Name | Description |
 | ------------------------ | --------------------------------------------------------------------------------------------- |
 | **wiki/**                         | You can add project documentation and insructions file here |
