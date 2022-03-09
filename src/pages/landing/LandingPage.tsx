@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import Loader from "../../components/loader/Loader";
 import { useAppSelector } from "../../store/hooks";
 import { getLandingPageDetails } from "../../store/landing/slice";
+import "./landing.scss";
 
 function LandingPage() {
   const dispatch = useDispatch();
