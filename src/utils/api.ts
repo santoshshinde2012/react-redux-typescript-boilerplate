@@ -5,18 +5,18 @@ const defaultBaseUrl =
 
 // Todo : Make default URL based on Environment ['dev', 'staging', 'test', 'prod']
 
-const  transformResponse = (input: string) => {
-    try {
-      return JSON.parse(input);
-    } catch (e) {
-      /* Ignore */
-    }
-}
+const transformResponse = (input: string) => {
+  try {
+    return JSON.parse(input);
+  } catch (e) {
+    /* Ignore */
+  }
+};
 
 const buildHeader = (obj = {}) => {
   const header = {
     Accept: "application/json",
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
   };
   Object.assign(header, obj);
   return header;
@@ -32,8 +32,8 @@ const apiFactory = (baseUrl: string = defaultBaseUrl, header = {}) => {
           return transformResponse(data);
         }
         return data;
-      }
-    ]
+      },
+    ],
   });
 
   return service;
