@@ -8,7 +8,7 @@ const defaultBaseUrl =
 const transformResponse = (input: string) => {
   try {
     return JSON.parse(input);
-  } catch (e) {
+  } catch {
     /* Ignore */
   }
 };

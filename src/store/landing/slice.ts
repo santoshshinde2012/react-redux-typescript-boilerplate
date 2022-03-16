@@ -1,18 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { LandingDetails } from "../../types/LandingPage";
+import { LandingDetails } from "../../types/landing-page";
 import httpclient from "../../utils/api";
 import error from "../../utils/error";
 
 interface LandingPageState {
-  data?: LandingDetails | null;
+  data?: LandingDetails | undefined;
   loading: boolean;
-  error?: string | null;
+  error?: string | undefined;
 }
 
 const initialState: LandingPageState = {
-  data: null,
+  data: undefined,
   loading: false,
-  error: null,
+  error: undefined,
 };
 
 export const getLandingPageDetails = createAsyncThunk(
@@ -21,8 +21,8 @@ export const getLandingPageDetails = createAsyncThunk(
     try {
       const response = await httpclient().get("/global/mock-data/landing.json");
       return response.data;
-    } catch (err) {
-      return err;
+    } catch (error_) {
+      return error_;
     }
   }
 );

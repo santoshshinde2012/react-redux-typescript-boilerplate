@@ -11,7 +11,7 @@ ReactDOM.render(
       <App />
     </Provider>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.querySelector("#root")
 );
 
 // If you want your app to work offline and load faster, you can change
