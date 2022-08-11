@@ -35,7 +35,7 @@
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.2",
-    "react-scripts": "5.0.0",
+    "react-scripts": "^5.0.1",
     "sass": "^1.49.9",
     "typescript": "~4.1.5"
   },
@@ -46,16 +46,18 @@
     "@types/jest": "^27.4.1",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.13.0",
-    "eslint": "^8.11.0",
+    "eslint": "^8.14.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.25.4",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-filename-rules": "^1.2.0",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest-dom": "^4.0.1",
+    "eslint-plugin-n": "^15.2.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-promise": "^5.2.0",
+    "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.29.3",
-    "eslint-plugin-unicorn": "^41.0.0",
+    "eslint-plugin-unicorn": "^42.0.0",
     "husky": "^7.0.4",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.5.1"
@@ -86,5 +88,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "overrides": {
+    "autoprefixer": "10.4.5",
+    "nth-check": "2.1.1"
   }
 }
