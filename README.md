@@ -77,29 +77,3 @@ Below is a list of all the scripts this template has available:
 | **.husky**              | Contains Husky settings and configurations            |
 | **build**                 | Contains the distributable (or output) from your TypeScript build. This is the code you ship  |
 | **node_modules**         | Contains all your npm dependencies                                                            |
-
-### Documentations
-
-
-Below is the basic flow for setting up the store and slice and using them in components. The official documentation can be found [here](https://redux-toolkit.js.org/tutorials/typescript) if you would like more information.
-
-```mermaid
-graph TD;
-  A1[UI]--Main Component connected via Provider-->B1[Create Store and Define Root State and Dispatch Types];
-  A1-->A2[Landing Page Component];
-  B1--configureStore, RootState and AppDispatch-->C1[Define Typed Hooks];
-  C1--useAppDispatch and useAppSelector-->D1[Application Usage];
-  D1--createSlice-->E1[Define Slice State and Action Types]
-  E1--landing-->F1[name]
-  E1--initialState-->G1[State]
-  E1--extraReducers-->H1[reducers]
-  E1-->I1[Actions]
-  I1-->i1[pending]
-  I1-->i2[fulfilled]
-  I1-->i3[rejected]
-  E1-->J1[Middleware]
-  E1-->K1[Enitity Adapter]
-  E1--Add Slice Reducers to the Store-->B1
-  H1-->H2[Export Reducers]
-  H2--Use Typed Hooks in Components-->A2
-```
