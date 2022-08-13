@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { LandingDetails } from "../../types/landing-page";
-import httpclient from "../../utils/api";
+import HttpClient from "../../utils/http-client";
 import error from "../../utils/error";
 
 interface LandingPageState {
@@ -19,7 +19,7 @@ export const getLandingPageDetails = createAsyncThunk(
   "landing/gerDetails",
   async () => {
     try {
-      const response = await httpclient().get("/global/mock-data/landing.json");
+      const response = await HttpClient.get("/global/mock-data/landing.json");
       return response.data;
     } catch (error_) {
       return error_;
