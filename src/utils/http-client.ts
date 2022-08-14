@@ -1,0 +1,77 @@
+import axios, {
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosRequestHeaders,
+  AxiosResponse,
+  AxiosResponseTransformer,
+} from "axios";
+
+export default class HttpClient {
+  // Here you can use your server URL
+
+  private static readonly baseURL: string =
+    process.env.REACT_APP_API_BASEURL || "http://localhost:3000";
+
+  private static buildHeader(obj = {}): AxiosRequestHeaders {
+    const header = {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+    Object.assign(header, obj);
+
+    return header;
+  }
+
+  private static transformResponse(
+    input: string
+  ): AxiosResponseTransformer | AxiosResponseTransformer[] {
+    return JSON.parse(input);
+  }
+
+  private static client(header = {}): AxiosInstance {
+    const config: AxiosRequestConfig = {
+      baseURL: this.baseURL,
+      headers: this.buildHeader(header),
+    };
+    config.transformResponse = [
+      (data) => {
+        return data && typeof data === "string"
+          ? this.transformResponse(data)
+          : data;
+      },
+    ];
+
+    return axios.create(config);
+  }
+
+  /**
+   *
+   * @param url
+   * @returns
+   */
+  public static get(url: string): Promise<AxiosResponse> {
+    return this.client().get(url);
+  }
+
+  /**
+   *
+   * @param url
+   * @param payload
+   * @returns
+   */
+  public static post<T>(url: string, payload: T): Promise<AxiosResponse> {
+    return this.client().post(url, payload);
+  }
+
+  public static patch<T>(url: string, payload: T): Promise<AxiosResponse> {
+    return this.client().patch(url, payload);
+  }
+
+  public static put<T>(url: string, payload: T): Promise<AxiosResponse> {
+    return this.client().put(url, payload);
+  }
+
+  public static delete(url: string): Promise<AxiosResponse> {
+    return this.client().delete(url);
+  }
+}
