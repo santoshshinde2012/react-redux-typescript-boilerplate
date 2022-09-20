@@ -18,6 +18,21 @@ Try it!! I am happy to hear your feedback or any kind of new features.
 - Integrated sass
 - Based on Typescript Syntax
 - Production Ready Skeleton
+- Handle multiple environments [dev, stag, prod]
+- Localstorage Utility
+- Common Http Client usin Axios
+- Client-Side Encryption and Decryption
+
+## Core NPM Module
+
+- [x] `react`, `@types/react`
+- [x] `react-dom`, `@types/react-dom`
+- [x] `typescript`
+- [x] `axios`
+- [x] `react-redux`, `@types/react-redux`
+- [x] `@types/node` 
+- [x] `react-scripts`
+- [x] `sass`
 
 ### Start the application
 
@@ -55,6 +70,7 @@ Below is a list of all the scripts this template has available:
 | ------------------------ | --------------------------------------------------------------------------------------------- |
 | **wiki/**                         | You can add project documentation and insructions file here |
 | **src**                  | Contains your source code that will be compiled to the build dir                               |
+| **src/environments/**                | Environment Files  |
 | **src/components/**                | UI Components  |
 | **src/pages/**                       | We can also call this "features" if we break the pages based on what will be served in the browser|
 | **src/resources/**               | Constant Variables such as images and strings  |
@@ -63,7 +79,6 @@ Below is a list of all the scripts this template has available:
 | **src/store/${page-name}/slice.ts               |  Contains slice configuration {state, action and reducers} |
 | **src/store/index.ts               |  Entry point for store configuration|
 | **src/styles/**               | SASS styles |
-| **src/types/**               | Schema or Types |
 | **src/utils/**               | Reusable utlity like api http client |
 | **src**/index.ts        | Entry point to your frontend app                                                               |
 | package.json             | File that contains npm dependencies
@@ -77,3 +92,13 @@ Below is a list of all the scripts this template has available:
 | **.husky**              | Contains Husky settings and configurations            |
 | **build**                 | Contains the distributable (or output) from your TypeScript build. This is the code you ship  |
 | **node_modules**         | Contains all your npm dependencies                                                            |
+
+
+
+## Refrences
+
+- [Skeleton for React with Redux Frontend Apps Written in TypeScript](https://javascript.plainenglish.io/skeleton-for-react-with-redux-frontend-apps-written-in-typescript-9f5490e94e6d)
+
+<hr/>
+
+### Please connect with me on Twitter [@shindesan2012](https://twitter.com/shindesan2012) & [https://blog.santoshshinde.com](https://blog.santoshshinde.com/)

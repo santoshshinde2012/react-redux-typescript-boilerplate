@@ -29,10 +29,17 @@ export default class HttpClient {
   }
 
   private static client(header = {}): AxiosInstance {
+    // cancelToken and source declaration
+    const cancelTokenSource = axios.CancelToken.source();
+
+    // axios client config
     const config: AxiosRequestConfig = {
       baseURL: this.baseURL,
+      cancelToken: cancelTokenSource.token,
       headers: this.buildHeader(header),
     };
+
+    // axios client response transformer
     config.transformResponse = [
       (data) => {
         return data && typeof data === "string"
@@ -41,6 +48,7 @@ export default class HttpClient {
       },
     ];
 
+    // create axios client
     return axios.create(config);
   }
 
