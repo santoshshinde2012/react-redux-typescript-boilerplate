@@ -19,8 +19,8 @@ Try it!! I am happy to hear your feedback or any kind of new features.
 - Based on Typescript Syntax
 - Production Ready Skeleton
 - Handle multiple environments [dev, stag, prod]
-- Localstorage Utility
-- Common Http Client usin Axios
+- Local Storage Utility
+- Common Http Client using Axios
 - Client-Side Encryption and Decryption
 - Support to run production build on local machine
 
