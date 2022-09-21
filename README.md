@@ -22,6 +22,7 @@ Try it!! I am happy to hear your feedback or any kind of new features.
 - Localstorage Utility
 - Common Http Client usin Axios
 - Client-Side Encryption and Decryption
+- Support to run production build on local machine
 
 ## Core NPM Module
 
@@ -33,6 +34,7 @@ Try it!! I am happy to hear your feedback or any kind of new features.
 - [x] `@types/node` 
 - [x] `react-scripts`
 - [x] `sass`
+- [X] `serve` 
 
 ### Start the application
 
