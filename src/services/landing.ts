@@ -18,6 +18,7 @@ export default class LandingServices {
     "/global/mock-data/landing.json";
 
   private static async landing() {
+    console.log(Environment.isOffline());
     const { data } = await HttpClient.get(`${this.GET_LANDING_PAGE_INFO}`);
     if (Environment.isOffline()) {
       await Storage.setItem(Landing.LANDING_PAGE, data.toString());

@@ -38,7 +38,13 @@ Try it!! I am happy to hear your feedback or any kind of new features.
 
 - Clone the Application git clone `https://github.com/santoshshinde2012/react-redux-typescript-boilerplate.git`
 - Install the dependencies `npm install`
-- Start the application `npm run dev`
+- Start the application `npm run start:dev`
+
+### Handle Multiple Environments
+
+- Make a new file in the root directory with the specifying the environment in file name. Example(`.env.{environment_name}`) -  `.env.development`
+- Make sure, all Variables should start with the prefix REACT_APP_ . Example(`REACT_APP_{variable_name}`) -  `REACT_APP_APPLY_ENCRYPTION`
+
 
 ### Running the build
 
@@ -56,6 +62,8 @@ Below is a list of all the scripts this template has available:
 | `build`                   | Full build. Runs ALL build tasks |
 | `build:prod`                   | Full production build. Runs ALL build tasks |
 | `start:dev`                   | Run the application in dev mode                                       |
+| `start:prod`                   | Run the application in production mode                                       |
+| `start:staging`                   | Run the application in staging mode                                       |
 | `build:css`                   | Build the css for production environment                                         |
 | `lint`                    | Runs ESLint on project files                                                                      |
 | `lint:fix`                    | Runs ESLint on project files and fixed the auto fix issues                                                                     |

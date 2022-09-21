@@ -5,18 +5,16 @@
   "author": "Santosh Shinde",
   "private": true,
   "scripts": {
-    "start": "env-cmd -f .env.dev react-scripts start",
+    "start": "NODE_ENV=dev react-scripts start",
     "build": "react-scripts build",
     "clean": "rimraf {bin,build}",
     "clean:cdn": "rimraf build/global/css",
     "build:css": "npm run clean && npm run clean:cdn && sass --no-source-map --style=compressed src/styles/index.scss public/global/css/index.css",
     "watch:css": "npm run build:css && sass --watch src/styles:public/global/css",
-    "build:prod": "npm run build:css && npm run build -- --profile",
-    "build:dev": " npm run clean && env-cmd -f .env.dev  react-scripts build ",
-    "build:staging": "npm run clean && env-cmd -f ./environments/.env.staging  react-scripts build",
-    "start:dev": " npm run clean && env-cmd -f environments/.env.dev  react-scripts start ",
-    "start:staging": "npm run clean && env-cmd -f ./environments/.env.staging  react-scripts start",
-    "dev": "npm-run-all -p watch:css start",
+    "build:prod": "NODE_ENV=production npm run build:css && npm run build -- --profile",
+    "start:dev": "NODE_ENV=dev npm-run-all -p watch:css start",
+    "start:staging": "NODE_ENV=staging react-scripts start",
+    "start:prod": "NODE_ENV=production serve -s build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write \"src/**/*.{ts,tsx,json,css,scss}\"",
@@ -50,7 +48,6 @@
     "@types/jest": "^27.4.1",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.13.0",
-    "env-cmd": "^10.1.0",
     "eslint": "^8.14.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^17.0.0",
@@ -65,7 +62,8 @@
     "eslint-plugin-unicorn": "^42.0.0",
     "husky": "^7.0.4",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "serve": "^14.0.1"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
