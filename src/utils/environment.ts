@@ -12,8 +12,6 @@ export default class Environment {
   }
 
   public static isOffline(): boolean {
-    console.log(process.env.REACT_APP_SECRET_KEY);
-
     const IS_OFFLINE = process.env.REACT_APP_IS_OFFLINE || false;
     return JSON.parse(IS_OFFLINE.toString());
   }
