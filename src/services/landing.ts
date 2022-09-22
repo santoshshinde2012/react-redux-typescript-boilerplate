@@ -18,10 +18,9 @@ export default class LandingServices {
     "/global/mock-data/landing.json";
 
   private static async landing() {
-    console.log(Environment.isOffline());
     const { data } = await HttpClient.get(`${this.GET_LANDING_PAGE_INFO}`);
     if (Environment.isOffline()) {
-      await Storage.setItem(Landing.LANDING_PAGE, data.toString());
+      await Storage.setItem(Landing.LANDING_PAGE, JSON.stringify(data));
     }
     return data;
   }
@@ -31,6 +30,7 @@ export default class LandingServices {
       const response =
         (await Storage.getItem(Landing.LANDING_PAGE)) ||
         (await LandingServices.landing());
+
       return response;
     } else {
       return await LandingServices.landing();
