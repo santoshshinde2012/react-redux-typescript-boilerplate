@@ -3,25 +3,25 @@ export default class Crypto {
   // So, the more is the number of iterations, the more secure the derived key will be,
   // but in that case it takes greater amount of time to complete.
   // number of interation - the value of 2145 is randomly chosen
-  private static iteration: number = 10;
+  private static iteration = 10;
 
   // algorithm - AES 256 GCM Mode
-  private static encryptionAlgorithm: string = "AES-GCM";
+  private static encryptionAlgorithm = "AES-GCM";
 
   // random initialization vector length
-  private static ivLength: number = 12;
+  private static ivLength = 12;
 
   // random salt length
-  private static saltLength: number = 16;
+  private static saltLength = 16;
 
   // digest: It is a digest algorithms of string type.
-  private static digest: string = "SHA-256";
+  private static digest = "SHA-256";
 
   // text encoder
-  private static enc: TextEncoder = new TextEncoder();
+  private static enc = new TextEncoder();
 
   // text decoder
-  private static dec: TextDecoder = new TextDecoder();
+  private static dec = new TextDecoder();
 
   /**
    *

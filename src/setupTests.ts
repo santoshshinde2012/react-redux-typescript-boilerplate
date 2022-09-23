@@ -3,3 +3,15 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom/extend-expect";
+
+// ReferenceError: TextEncoder is not defined
+if (typeof TextEncoder === "undefined") {
+  // eslint-disable-next-line unicorn/prefer-module
+  global.TextEncoder = require("util").TextEncoder;
+}
+
+// ReferenceError: TextDecoder is not defined
+if (typeof TextDecoder === "undefined") {
+  // eslint-disable-next-line unicorn/prefer-module
+  global.TextDecoder = require("util").TextDecoder;
+}
