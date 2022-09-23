@@ -3,25 +3,25 @@ export default class Crypto {
   // So, the more is the number of iterations, the more secure the derived key will be,
   // but in that case it takes greater amount of time to complete.
   // number of interation - the value of 2145 is randomly chosen
-  private static iteration = 10;
+  private static iteration: number = 10;
 
   // algorithm - AES 256 GCM Mode
-  private static encryptionAlgorithm = "AES-GCM";
+  private static encryptionAlgorithm: string = "AES-GCM";
 
   // random initialization vector length
-  private static ivLength = 12;
+  private static ivLength: number = 12;
 
   // random salt length
-  private static saltLength = 16;
+  private static saltLength: number = 16;
 
   // digest: It is a digest algorithms of string type.
-  private static digest = "SHA-256";
+  private static digest: string = "SHA-256";
 
   // text encoder
-  private static enc = new TextEncoder();
+  private static enc: TextEncoder = new TextEncoder();
 
   // text decoder
-  private static dec = new TextDecoder();
+  private static dec: TextDecoder = new TextDecoder();
 
   /**
    *
@@ -60,24 +60,30 @@ export default class Crypto {
    *
    * @param passwordKey
    * @param salt
+   * @param iteration
+   * @param digest
+   * @param encryptionAlgorithm
    * @param keyUsage
    * @returns
    */
   private static deriveKey(
     passwordKey: CryptoKey,
     salt: Uint8Array,
+    iteration: number,
+    digest: string,
+    encryptionAlgorithm: string,
     keyUsage: ["encrypt"] | ["decrypt"]
   ): Promise<CryptoKey> {
     return window.crypto.subtle.deriveKey(
       {
         name: "PBKDF2",
         salt,
-        iterations: Crypto.iteration,
-        hash: Crypto.digest,
+        iterations: iteration,
+        hash: digest,
       },
       passwordKey,
       {
-        name: Crypto.encryptionAlgorithm,
+        name: encryptionAlgorithm,
         length: 256,
       },
       false,
@@ -91,7 +97,10 @@ export default class Crypto {
    * @param data
    * @returns
    */
-  public static async encrypt(secretKey: string, data: string) {
+  public static async encrypt(
+    secretKey: string,
+    data: string
+  ): Promise<string> {
     try {
       // generate random salt
       const salt = window.crypto.getRandomValues(
@@ -104,16 +113,26 @@ export default class Crypto {
 
       // create master key from secretKey
       // The method gives an asynchronous Password-Based Key Derivation
+      // Create a password based key (PBKDF2) that will be used to derive the AES-GCM key used for encryption
       const passwordKey = await Crypto.getPasswordKey(secretKey);
 
       // to derive a secret key from a master key for encryption
-      const aesKey = await Crypto.deriveKey(passwordKey, salt, ["encrypt"]);
+      // Create an AES-GCM key using the PBKDF2 key and a randomized salt value.
+      const aesKey = await Crypto.deriveKey(
+        passwordKey,
+        salt,
+        Crypto.iteration,
+        Crypto.digest,
+        Crypto.encryptionAlgorithm,
+        ["encrypt"]
+      );
 
       // create a Cipher object, with the stated algorithm, key and initialization vector (iv).
       // @algorithm - AES 256 GCM Mode
       // @key
       // @iv
       // @options
+      // Encrypt the input data using the AES-GCM key and a randomized initialization vector (iv).
       const encryptedContent = await window.crypto.subtle.encrypt(
         {
           name: Crypto.encryptionAlgorithm,
@@ -175,12 +194,22 @@ export default class Crypto {
 
       // create master key from secretKey
       // The method gives an asynchronous Password-Based Key Derivation
+      // Create a password based key (PBKDF2) that will be used to derive the AES-GCM key used for decryption.
       const passwordKey = await Crypto.getPasswordKey(secretKey);
 
       // to derive a secret key from a master key for decryption
-      const aesKey = await Crypto.deriveKey(passwordKey, salt, ["decrypt"]);
+      // Create an AES-GCM key using the PBKDF2 key and the salt from the ArrayBuffer.
+      const aesKey = await Crypto.deriveKey(
+        passwordKey,
+        salt,
+        Crypto.iteration,
+        Crypto.digest,
+        Crypto.encryptionAlgorithm,
+        ["decrypt"]
+      );
 
       // Return the buffer containing the value of cipher object.
+      // Decrypt the input data using the AES-GCM key and the iv from the ArrayBuffer.
       const decryptedContent = await window.crypto.subtle.decrypt(
         {
           name: Crypto.encryptionAlgorithm,
