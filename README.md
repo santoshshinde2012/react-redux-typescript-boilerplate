@@ -31,7 +31,6 @@ Try it!! I am happy to hear your feedback or any kind of new features.
 - [x] `typescript`
 - [x] `axios`
 - [x] `react-redux`, `@types/react-redux`
-- [x] `@types/node` 
 - [x] `react-scripts`
 - [x] `sass`
 - [X] `serve` 
