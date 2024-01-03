@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-redux-typescript-boilerplate/static/css/main.f5fa6169.css",
+    "main.js": "/react-redux-typescript-boilerplate/static/js/main.2d4af586.js",
+    "index.html": "/react-redux-typescript-boilerplate/index.html",
+    "main.f5fa6169.css.map": "/react-redux-typescript-boilerplate/static/css/main.f5fa6169.css.map",
+    "main.2d4af586.js.map": "/react-redux-typescript-boilerplate/static/js/main.2d4af586.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f5fa6169.css",
+    "static/js/main.2d4af586.js"
+  ]
+}
