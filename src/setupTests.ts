@@ -7,11 +7,11 @@ import "@testing-library/jest-dom/extend-expect";
 // ReferenceError: TextEncoder is not defined
 if (typeof TextEncoder === "undefined") {
   // eslint-disable-next-line unicorn/prefer-module
-  global.TextEncoder = require("util").TextEncoder;
+  global.TextEncoder = require("node:util").TextEncoder;
 }
 
 // ReferenceError: TextDecoder is not defined
 if (typeof TextDecoder === "undefined") {
   // eslint-disable-next-line unicorn/prefer-module
-  global.TextDecoder = require("util").TextDecoder;
+  global.TextDecoder = require("node:util").TextDecoder;
 }

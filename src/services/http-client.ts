@@ -1,7 +1,6 @@
 import axios, {
   AxiosInstance,
   AxiosRequestConfig,
-  AxiosRequestHeaders,
   AxiosResponse,
   AxiosResponseTransformer,
 } from "axios";
@@ -11,16 +10,6 @@ export default class HttpClient {
 
   private static readonly baseURL: string =
     process.env.REACT_APP_API_BASEURL || "http://localhost:3000";
-
-  private static buildHeader(obj = {}): AxiosRequestHeaders {
-    const header = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    };
-    Object.assign(header, obj);
-
-    return header;
-  }
 
   private static transformResponse(
     input: string
@@ -32,11 +21,17 @@ export default class HttpClient {
     // cancelToken and source declaration
     const cancelTokenSource = axios.CancelToken.source();
 
+    const headers = {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      ...header,
+    };
+
     // axios client config
     const config: AxiosRequestConfig = {
       baseURL: this.baseURL,
       cancelToken: cancelTokenSource.token,
-      headers: this.buildHeader(header),
+      headers,
     };
 
     // axios client response transformer
