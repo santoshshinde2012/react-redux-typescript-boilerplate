@@ -1,7 +1,3 @@
-import Crypto from "./crypto";
-import Environment from "./environment";
-import { isStringified } from "./helper";
-
 export default class Storage {
   /**
    *
@@ -10,12 +6,7 @@ export default class Storage {
    */
   public static async getItem(key: string): Promise<string | null> {
     const item = window.localStorage.getItem(key) || "";
-    const passkey = Environment.secretKey();
-    return isStringified(
-      Environment.applyEncryption() && passkey && item
-        ? await Crypto.decrypt(passkey, item)
-        : item
-    );
+    return item;
   }
 
   /**
@@ -24,13 +15,7 @@ export default class Storage {
    * @param value
    */
   public static async setItem(key: string, value: string): Promise<void> {
-    const passkey = Environment.secretKey();
-    if (Environment.applyEncryption() && passkey && value) {
-      const item = await Crypto.encrypt(passkey, value);
-      window.localStorage.setItem(key, item);
-    } else {
-      window.localStorage.setItem(key, value);
-    }
+    window.localStorage.setItem(key, value);
   }
 
   /**

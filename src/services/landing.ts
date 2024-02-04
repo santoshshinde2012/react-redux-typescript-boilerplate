@@ -1,4 +1,3 @@
-import Environment from "../utils/environment";
 import Storage from "../utils/local-storage";
 import HttpClient from "./http-client";
 
@@ -19,21 +18,15 @@ export default class LandingServices {
 
   private static async landing() {
     const { data } = await HttpClient.get(`${this.GET_LANDING_PAGE_INFO}`);
-    if (Environment.isOffline()) {
-      await Storage.setItem(Landing.LANDING_PAGE, JSON.stringify(data));
-    }
+    await Storage.setItem(Landing.LANDING_PAGE, JSON.stringify(data));
     return data;
   }
 
   public static async getLandingPageInfo() {
-    if (Environment.isOffline()) {
-      const response =
-        (await Storage.getItem(Landing.LANDING_PAGE)) ||
-        (await LandingServices.landing());
+    const response =
+      (await Storage.getItem(Landing.LANDING_PAGE)) ||
+      (await LandingServices.landing());
 
-      return response;
-    } else {
-      return await LandingServices.landing();
-    }
+    return response;
   }
 }

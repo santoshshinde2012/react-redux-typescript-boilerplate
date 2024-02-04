@@ -12,7 +12,7 @@ export default class HttpClient {
     process.env.REACT_APP_API_BASEURL || "http://localhost:3000";
 
   private static transformResponse(
-    input: string
+    input: string,
   ): AxiosResponseTransformer | AxiosResponseTransformer[] {
     return JSON.parse(input);
   }

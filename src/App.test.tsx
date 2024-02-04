@@ -7,7 +7,7 @@ test("renders learn react link", () => {
   const { container } = render(
     <Provider store={store}>
       <App />
-    </Provider>
+    </Provider>,
   );
   container.querySelector(".landing");
   expect(container.firstChild).toMatchSnapshot();

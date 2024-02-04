@@ -22,7 +22,7 @@ export const getLandingPageDetails = createAsyncThunk(
     } catch (error_) {
       return error_;
     }
-  }
+  },
 );
 
 const slice = createSlice({
